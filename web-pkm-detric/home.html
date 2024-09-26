@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detric</title>
+    <link rel="icon" href="/logo/logo_detric_baru" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            height: 100%;
+            width: 100%;
+        }
+
+        .navbar {
+            background-color: rgb(10, 1, 136);
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .navbar .logo {
+            float: left;
+            display: block;
+            color: white;
+            text-align: left;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar .logo-text {
+            margin-left: 5px;
+            color: #B5509E;
+            font-size: 1.4em;
+            font-family: 'Bahnschrift';
+            font-weight: bold;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .navbar .paragraph p {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .navbar img {
+            width: 9%;
+            margin: 0 auto;
+            border-radius: 30%;
+            outline: 1px solid rgb(255, 255, 0);
+        }
+
+        .navbar .logo:hover {
+            background-color: #333;
+        }
+
+        .navbar .right-links {
+            float: right;
+        }
+
+        .navbar .right-links a {
+            display: inline-block;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+        }
+
+        .navbar .right-links a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .hero {
+            background-image: url('dokter.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            color: #fff;
+        }
+
+        .detric {
+            color: rgb(217, 255, 0);
+        }
+
+        .hero h2 {
+            color: rgb(255, 255, 255);
+        }
+
+        .hero .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-start {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.5em;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .hero img {
+            width: 50%;
+            margin: 0 auto;
+            border-radius: 30%;
+            margin-bottom: 20px;
+            outline: 3px solid rgb(255, 255, 0);
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .start-container {
+            background: linear-gradient(to right, #8e44ad, #3498db, #e91e63);
+            color: #fff;
+            padding: 40px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            border-radius: 1%;
+            outline: 3px solid rgb(0, 255, 208);
+            width: 1200px;
+            height: auto;
+        }
+
+        .start-container .left-side {
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            outline: 0.1px solid rgb(212, 255, 0);
+        }
+
+        .start-container .right-side {
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            outline: 0.1px solid rgb(212, 255, 0);
+        }
+
+        .start-container .left-side .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .start-container .left-side .h2 {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .start-container h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .start-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .start-container ul li {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(112, 6, 150, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-box {
+            padding: 20px;
+            background: rgb(50, 6, 245);
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            outline: 3px solid rgb(255, 247, 0);
+            text-align: center;
+        }
+
+        .loading-box p {
+            color: yellow;
+            font-weight: bold;
+            font-family: 'Arial';
+        }
+
+        body.loading #content {
+            opacity: 0.3;
+        }
+
+        .detection-result-container {
+            background: linear-gradient(to right, #6500a8, #0018b3);
+            color: yellow;
+            font-size: 0.73em;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            outline: 3px solid rgb(255, 0, 0);
+            width: 500px;
+            height: 360px;
+            justify-content: left;
+            text-align: left;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #02eaff39;
+        }
+
+        .video-frame {
+            width: 70%;
+            border: 5px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .video-frame video {
+            width: 100%;
+            display: block;
+            margin-top: -8px;
+            outline: 3px solid rgb(255, 247, 0);
+        }
+
+        /* Styles for BrainHealth section */
+        .brainhealth-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            max-width: 5000px;
+            height: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #02eaff39;
+            /* Background color for the section */
+            border-radius: 10px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Optional: Add a shadow for better appearance */
+        }
+
+        .brainhealth-images {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            border-right: 2px solid #ccc;
+            /* Separator line */
+            padding-right: 20px;
+            /* Space between image and separator */
+            margin-right: 20px;
+            /* Space between separator and info */
+        }
+
+        .brainhealth-phone {
+            width: 600px;
+            /* Adjust the width as needed */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+
+        .brainhealth-title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .brainhealth-info p strong {
+            font-weight: bold;
+        }
+
+        .brainhealth-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            /* Ensure the image covers the area without being cut off */
+        }
+
+        .brainhealth-info {
+            max-width: 500px;
+            margin-left: 20px;
+        }
+
+        .brainhealth-info h2 {
+            font-size: 2.9em;
+            margin-bottom: 20px;
+        }
+
+        .brainhealth-info p {
+            font-size: 1.8em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .brainhealth-info .btn-download {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="https://www.instagram.com/detric.pkmkcbrawijaya?igsh=MXg4Y2kzZ2NxbndvNw==" class="logo"><img
+                src="/logo/Logo Detric Original.png" alt="Logo Detric">
+            <span class="logo-text">Detric</span>
+        </a>
+        <div class="right-links">
+            <a href="login.html">Hi, Windy !</a>
+            <a href="#about">About</a>
+            <a href="#">Home</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <img src="/logo/Logo Detric Original.png" alt="Logo Detric">
+            <h1><span class="welcome">Welcome To</span> <span class="detric">Detric</span></h1>
+            <h2>Detector of Psychiatric Disorder</h2>
+            <div class="btn-container">
+                <a href="#start-container" class="btn-start">Mulai !</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BrainHealth Section -->
+    <div id="about" class="brainhealth-container">
+        <div class="brainhealth-images">
+            <div class="brainhealth-phone">
+                <img class="brainhealth-image" src="foto aqil.jpg" alt="Phone Image 1">
+            </div>
+        </div>
+        <div class="brainhealth-info">
+            <h2>Detric: Detector of Psychiatric Disorder</h2>
+            <p><strong>Detric</strong> adalah alat deteksi gangguan jiwa berbasis machine learning <strong>ANN</strong>. Dengan
+                menggunakan Parameter <strong>PSD</strong> dan <strong> FC </strong> maka didapatkan data yang akurat,
+                Detric dapat memberikan hasil deteksi yang cepat dan terpercaya.</p>
+            <p></p>
+            <a href="https://www.instagram.com/detric.pkmkcbrawijaya?igsh=MXg4Y2kzZ2NxbndvNw=="
+                class="btn-download">More About Us</a>
+        </div>
+    </div>
+
+    <div id="start" class="container">
+        <div class="start-container" id="start-container">
+            <div class="left-side">
+                <h2>Klik Start untuk memulai alat</h2>
+                <div class="btn-container">
+                    <a href="#" class="btn-start" onclick="startDetection()">Start</a>
+                </div>
+                <div id="detection-result" class="detection-result-container">
+                    <h3>Model Machine Learning mendeteksi anda 98.46% Healthy control</h3>
+                    <ul>
+                        <li>Persentase Model Lainnya:</li>
+                        <li>1. Alcohol use disorder: 7.01%</li>
+                        <li>2. Behavioral addiction disorder: 21.76%</li>
+                        <li>3. Panic disorder: 10.35%</li>
+                        <li>4. Social anxiety disorder: 34.34%</li>
+                        <li>5. Healthy control: 98.46%</li>
+                        <li>6. Bipolar disorder: 2.64%</li>
+                        <li>7. Depressive disorder: 0.64%</li>
+                        <li>8. Obsessive compulsive disorder: 23.54%</li>
+                        <li>9. Schizophrenia: 30.34%</li>
+                        <li>10. Acute stress disorder: 7.59%</li>
+                        <li>11. Adjustment disorder: 5.25%</li>
+                        <li>12. Posttraumatic stress disorder: 42.35%</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-side">
+                <h2>Penyakit yang dapat dideteksi alat ini:</h2>
+                <ul>
+                    <li>1. Alcohol use disorder</li>
+                    <li>2. Behavioral addiction disorder</li>
+                    <li>3. Panic disorder</li>
+                    <li>4. Social anxiety disorder</li>
+                    <li>5. Healthy control</li>
+                    <li>6. Bipolar disorder</li>
+                    <li>7. Depressive disorder</li>
+                    <li>8. Obsessive compulsive disorder</li>
+                    <li>9. Schizophrenia</li>
+                    <li>10. Acute stress disorder</li>
+                    <li>11. Adjustment disorder</li>
+                    <li>12. Posttraumatic stress disorder</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading">
+        <div class="loading-box">
+            <p>Please wait, Detric is Working !!</p>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <div class="video-frame">
+            <video id="video" autoplay muted>
+                <source src="eeg_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        function startDetection() {
+            document.getElementById('loading').style.display = 'flex';
+            document.body.classList.add('loading');
+
+            setTimeout(function () {
+                document.getElementById('loading').style.display = 'none';
+                document.body.classList.remove('loading');
+                var detectionResult = document.getElementById('detection-result');
+                detectionResult.style.display = 'block';
+            }, 3000); // Mengatur waktu loading selama 3 detik
+        }
+
+        window.addEventListener('load', function () {
+            var video = document.getElementById('video');
+            video.play();
+        });
+    </script>
+</body>
+
+</html>

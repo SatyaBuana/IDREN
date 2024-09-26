@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --base-clr: #48037c; /* Warna dasar latar belakang */
+    --line-clr: hsl(174, 97%, 49%); /* Warna garis dan border */
+    --hover-clr: #555896; /* Warna hover */
+    --text-clr: #b145eb; /* Warna teks utama */
+    --accent-clr: #0efe0a; /* Warna aksen biru */
+    --secondary-text-clr: #37064a; /* Warna teks sekunder */
+    --sidebar-clr: #ffffff; /* Warna sidebar biru gelap */
+  }
+  
+  
+  
+
+*{ /*tidak ada lagi margin dan padding */
+    margin: 0;
+    padding: 0;
+}
+
+html{ /*mengatur font family dan tinggi*/
+    font-family: Poppins, 'Segoe UI', Tahoma, Verdana;
+    line-height: 1.5rem;
+}
+
+body { /*diatur agar body sesuai dengan device dan spesifik requrements */
+    min-width: 100vh;
+    min-height: 100dvh;
+    background-color: var(--base-clr);
+    color: var(--text-clr);
+    display: grid; /*grid*/ /**/
+    grid-template-columns: auto 1fr; /*kolom pertama automatik size, kemudian selanjutnya 1fr untuk 1 pecahan*/
+    /*dengan cara ini kita bisa mengatur side bar responsive sesuai dengan kebutuhan device 
+    dan main content responsive dengan 1fr dan akan mengecil atau membesar tergantung pada device*/
+}
+
+#sidebar {
+    box-sizing: border-box;
+    height: 100vh; /*untuk membuatnya setinggi kebutuhan device*/
+    width: 250px;
+    padding: 5px 1em;
+    background-color: var(--sidebar-clr);
+    border-right: 1px solid var(--line-clr);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 2);
+    transition: width 0.3s ease-in-out;
+
+    /*3 bagian dibawah membuat jika di scroll kebawah maka sidebar tidak scroll dan 
+    posisi dari sidebar tidak fixed */
+    position: sticky;
+    top: 0;
+    align-self: start;
+    transition: 300ms ease-in-out;
+    overflow: hidden; /*menghilangkan semua elemen saat di tutup */
+    white-space: nowrap; /*supaya teks saat animasi tidak terbungkus */
+}
+
+#sidebar.close{
+    padding: 5px;
+    width: 60px;
+}
+
+#sidebar ul{
+    list-style: none;
+    font-weight: bolder;
+}
+
+#sidebar > ul > li:first-child{
+    display: flex;
+    justify-content: flex-end;
+    margin: bottom 16px;
+}
+
+
+.logo img{
+    filter: brightness(1.1);
+}
+
+#sidebar ul li.active a {
+    color: var(--accent-clr)
+}
+
+#sidebar ul li.active span {
+    color: var(--accent-clr)
+}
+
+#sidebar ul li.active svg {
+    fill: var(--accent-clr);
+}
+
+#sidebar a, #sidebar .dropdown-btn, #sidebar .logo {
+    border-radius: .5em;
+    padding: .85em;
+    text-decoration: none;
+    color: var(--text-clr);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.sub-menu li {
+    font-weight: lighter;
+}
+
+.dropdown-btn{
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+#sidebar svg {
+    flex-shrink: 0;
+    fill: var(--text-clr);
+}
+
+#sidebar a span, #sidebar .dropdown-btn span {
+    flex-grow: 1;
+}
+
+/*animation */
+#sidebar .sub-menu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms ease-in-out;
+}
+
+#sidebar .sub-menu > div {
+    overflow: hidden;
+}
+
+#sidebar .sub-menu.show {
+    grid-template-rows: 1fr;
+}
+
+.dropdown-btn svg{
+    transition: 200ms ease;
+}
+
+.rotate svg:last-child{
+    rotate: 180deg;
+}
+
+#sidebar .sub-menu a{
+    padding-left: 2em;
+}
+
+#toggle-btn {
+    margin-left: auto;
+    padding: 1em;
+    border: none;
+    border-radius: .5em;
+    background: none;
+    cursor: pointer;
+}
+
+#toggle-btn svg {
+    transition: rotate 150ms ease;
+}
+
+#toggle-btn:hover{
+    background-color: var(--hover-clr);
+}
+
+main {
+    padding: min(30px, 7%);
+}
+
+main p {
+    color: var(--secondary-text-clr);
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    margin-bottom: 20px;
+    padding: 0.7em;
+    background-color: rgb(255, 255, 255);
+}
+.container h2, p { 
+    margin-top: 1em
+}
+
+
+
+/*tambahan dari aing */
+.judul {
+    display: flex;
+    font-size: 1.5em;
+    font-weight: bolder;
+    padding-left: 1em;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 1em auto;
+    background: linear-gradient(90deg, #8e44ad, #3498db, #e91e63); /* Gradien warna */
+    background-clip: text; /* Memotong latar belakang hanya di bagian teks */
+    -webkit-text-fill-color: transparent; /* Membuat teks transparan agar latar belakang gradien terlihat */
+}
+
+#sidebar.close .judul {
+    opacity: 0; /*judul hilang */
+    transform: translateY(-10px);
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+   
+}
+
+.header-information {
+    flex-grow: 1;
+}
+
+.header-information-upper
+, .header-information-middle
+, .header-information-lower {
+    flex-grow: 1;
+    height: 2rem;
+    padding: 0.3em;
+    margin-bottom: 1vh;
+    overflow: hidden;
+}
+
+.information svg {
+    fill: var(--text-clr);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.header-information-upper span {
+    margin-right: 20px;
+}
+
+.activity {
+    color: #3498db;
+}
+
+.header-information-middle {
+    color: black;
+    list-style: none;
+    
+}
+
+.header-information-middle svg{
+    fill: black;
+}
+
+.header-information-middle span{
+    margin-right: 20px;
+}
+
+.header-information-lower svg {
+    fill: #00ba89;
+    margin-right: 10px;
+}
+
+.start {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.start button {
+    padding: 5px 2em;
+    background-color: rgb(11, 7, 56);
+    color: white;
+    cursor: pointer;
+}
+
+.start button:hover {
+    background: rgb(55, 46, 157); ;
+}
+
+.popup {
+    visibility: hidden; /* Sembunyikan popup secara default */
+    opacity: 0; /* Popup tidak terlihat secara default */
+    position: absolute; /* Menempatkan popup di atas tombol */
+    left: 80%;
+    top: 8%;
+    transform: translateX(-50%); /* Agar popup berada tepat di tengah tombol */
+    background-color: #e74c3c;
+    color: rgb(9, 9, 9);
+    padding: .5px .85em;
+    border-radius: 4px;
+    white-space: nowrap; /* Agar teks tidak terpotong di beberapa baris */
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out, visibility 0s 2s; /* Transisi opacity selama 0.5 detik dan visibility akan aktif setelah 2 detik */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan untuk efek floating */
+    border: 2px solid var(--line-clr); /* Border dengan warna sedikit lebih gelap */
+    font-weight: bold;
+    text-transform: uppercase; /* Huruf kapital untuk lebih menonjol */
+    letter-spacing: 1px;
+    font-size: .7em;
+    flex-shrink: 0;
+
+    display: flex; /* Mengatur tata letak icon dan teks secara horizontal */
+    align-items: center;
+    gap: 10px; /* Jarak antara icon dan teks */
+}
+
+
+.popup svg {
+    flex-shrink: 0; /* Agar SVG tidak mengecil */
+    width: 24px;
+    height: 24px;
+    fill: #e8eaed; /* Warna icon sesuai permintaan */
+}
+
+.start:hover .popup {
+
+    visibility: visible; /* Popup terlihat setelah delay */
+    transform: translateX(-50%) scale(1); /* Popup membesar sedikit untuk efek */
+    opacity: 1; /* Muncul dengan transisi */
+    transition-delay: 2s; /* Transisi mulai setelah 2 detik */
+    transition: opacity 1s ease-in-out; /* Hanya opacity yang akan di-transisi */
+}
+
+/*loader */
+
+.loader {
+    display: none; /* Loader tidak terlihat di awal */
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    transform: translateX(-50%);
+    font-family: helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #ce4233;
+    letter-spacing: 0.2em;
+}
+
+.loader::before, .loader::after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: #ce4233;
+    position: absolute;
+    animation: load 0.7s infinite alternate ease-in-out;
+}
+
+.loader::before {
+    top: 0;
+}
+
+.loader::after {
+    bottom: 0;
+}
+
+@keyframes load {
+    0% { left: 0; height: 30px; width: 15px; }
+    50% { height: 8px; width: 40px; }
+    100% { left: 235px; height: 30px; width: 15px; }
+}
+
+
+
+.container-hasil{
+    display: none;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    margin-bottom: 20px;
+    padding: 0.7em;
+    background-color: rgb(255, 255, 255);
+}
+
+.hasil-deteksi-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.container-hasil h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Mengatur kiri dan kanan agar bersebelahan */
+.hasil-deteksi-container-kiri,
+.hasil-deteksi-container-kanan {
+text-align: justify;
+   margin: 10px auto;
+}
+
+.hasil-deteksi-container {
+    display: flex;
+    justify-content: space-between; /* Memberi jarak antara kiri dan kanan */
+    flex-wrap: wrap;
+    max-width: 1200px; /* Batas maksimal lebar container */
+}
+
+.hasil-deteksi-container-kiri ul, 
+.hasil-deteksi-container-kanan ul {
+    list-style: none;
+    padding: 0;
+    
+}
+
+.hasil-deteksi-container ul li {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: rgb(6, 6, 6);
+}
+
+.hasil-deteksi-kesimpulan {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hasil-deteksi-kesimpulan h3 {
+    font-size: 1.5rem;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.container-video {
+    display: none; /* Tersembunyi sebelum tombol diklik */
+    flex-direction: row;
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    margin-bottom: 20px;
+    padding: 0.7em;
+    background-color: rgb(255, 255, 255);
+}
+
+.video-frame {
+    flex-grow: 1;
+    width: 70%;
+    border: 5px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.video-frame video {
+    width: 100%;
+    display: block;
+    margin-top: -8px;
+    outline: 3px solid rgb(255, 247, 0);
+}
+

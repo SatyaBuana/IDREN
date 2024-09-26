@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Fredoka One
+Author: Milena Brandao
+Url: https://fonts.google.com/specimen/Fredoka+One
+
+Font: League Spartan
+Author: Matt Bailey,Tyler Finck
+Url: https://fonts.google.com/specimen/League+Spartan

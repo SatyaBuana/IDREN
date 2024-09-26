@@ -1,0 +1,180 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255);
+  padding: 0px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+form {
+  width: 30%;
+}
+#login-container h1 {
+  margin: 10px, auto;
+  padding: 0px;
+  font-size: 50px;
+  color: rgb(0, 0, 0);
+  font-weight: lighter;
+}
+
+#login-container .type-icon input[type="text"],
+#login-container .type-icon input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 0px auto;
+  border: 1px solid #000;
+  border-radius: 15px;
+  box-sizing: border-box;
+  background-color: rgba(245, 231, 231, 0.5);
+  padding-left: 2rem;
+}
+
+#login-container .type-icon {
+  position: relative;
+}
+
+#login-container .type-icon i {
+  position: absolute;
+  left: 0.6em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #999;
+}
+
+#login-container p {
+  text-align: left;
+  font-size: 20px;
+  width: inherit;
+  padding: 0px;
+  margin: 1px, auto;
+  color: black;
+  font-weight: bold;
+}
+
+#login-container input[type="submit"] {
+  background-color: #9003f5;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 40%;
+  margin: 20px auto;
+}
+
+#login-container input[type="submit"]:hover {
+  background-color: #45a09b;
+}
+
+#login-container a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+#login-container .logo {
+  margin: 20px auto;
+}
+
+#login-container .logo img {
+  width: 80%;
+}
+
+#login-container .logo p {
+  font-size: 30px;
+  margin: 2px auto;
+  padding: 15px;
+  background: linear-gradient(
+    135deg,
+    #8e44ad,
+    #3498db,
+    #e91e63
+  ); /* Gradasi warna */
+  -webkit-background-clip: text; /* Untuk membuat latar belakang hanya berlaku di teks */
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+#login-design-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/neurons-bright-background.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 0px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+#login-design-container h1 {
+  font-weight: bolder;
+  font-size: 100%;
+  width: 50%;
+  padding: 5px;
+  margin: 0px auto;
+}
+#login-design-container img {
+    margin-top: 40px;
+    filter: brightness(1.2);
+}
+
+#login-design-container h2 {
+    margin: 12px auto;
+    font-size: 30px;
+
+}
+
+#login-design-container h3 {
+    margin-top: 0px;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+#Policy {
+    position: absolute;
+    bottom: 0; /* Menempatkan elemen di bagian bawah kontainer */
+    width: 100%; /* Memastikan elemen melebar sesuai dengan kontainer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Jarak antar elemen teks */
+    font-family: Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    padding: 10px 0; /* Tambahan jarak di atas dan bawah */
+    background-color: #f9f9f900; /* Latar belakang opsional */
+  }
+  
+  #Policy p {
+    margin: 0;
+    font-weight: bolder;
+  }
+  
+  #Policy p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
