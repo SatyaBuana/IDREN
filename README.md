@@ -1,2 +1,2 @@
-# IDREN
-project idren
+# Learning stuff
+Projects in my university
